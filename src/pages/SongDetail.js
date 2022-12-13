@@ -1,5 +1,11 @@
-const SongDetail = () => {
-  return <div>SongDetail</div>;
-};
+import React from 'react'
 
-export default SongDetail;
+const SongDetail = () => {
+  return (
+    <div className="card card-body">
+      <h2>SongDetail</h2>
+    </div>
+  );
+}
+
+export default SongDetail
