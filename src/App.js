@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Navigate } from "react";
 // axiso API
 import instance from "./api/axios";
 import requests from "./api/request";
@@ -10,6 +10,7 @@ import SongList from "./pages/SongList";
 import Player from "./pages/Player";
 import PlayerIndex from "./pages/PlayerIndex";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Notfound from "./pages/Notfound";
 
 const App = () => {
   // 멤버목록 데이터
@@ -39,25 +40,25 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
-      <Router>
-        <div className="conteainer">
-          <Header />
-          <Routes>
-            {/* <Route path="개발자가 설정한URL" /> */}
-            {/* <Route path="/ : 도메인만 입력한다" /> */}
-            {/* <Route element=q보여 줄 컴퍼넌트 입력 */}
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About title="인디밴드" />} />
-            <Route path="/members" element={<Members members={members} />} />
-            <Route path="/songs" element={<SongList songs={songs} />}>
-              <Route index element={<PlayerIndex />} />
-              <Route path=":id" element={<Player songs={songs} />} />
-            </Route>
-          </Routes>
-        </div>
-      </Router>
-    </div>
+    <Router>
+      <div className="container">
+        <Header />
+        <Routes>
+          {/* <Route path="개발자가 설정한URL" /> */}
+          {/* <Route path="/ : 도메인만 입력한다" /> */}
+          {/* <Route element=q보여 줄 컴퍼넌트 입력 */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About title="인디밴드" />} />
+          <Route path="/members" element={<Members members={members} />} />
+          <Route path="/songs" element={<SongList songs={songs} />}>
+            <Route index element={<PlayerIndex />} />
+            <Route path=":id" element={<Player songs={songs} />} />
+          </Route>
+          <Route path="*" element={<Notfound />}></Route>
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
